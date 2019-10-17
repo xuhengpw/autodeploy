@@ -1,23 +1,12 @@
 <p align="center">
     <img align="center" src="docs/assets/img/logo-blue.svg" width="350px" />
 </p>
-<h3 align="center">Syncd - 自动化部署工具</h3>
-<p align="center">
-    <a href="https://travis-ci.org/dreamans/syncd"><img src="https://img.shields.io/travis/dreamans/syncd/master.svg" /></a>
-    <a href="https://github.com/dreamans/syncd/blob/master/LICENSE"><img src="https://img.shields.io/github/license/dreamans/syncd.svg" /></a>
-    <a href="https://github.com/dreamans/syncd/releases"><img src="https://img.shields.io/github/release/dreamans/syncd.svg" /></a>
-    <a href="https://github.com/dreamans/syncd/stargazers"><img src="https://img.shields.io/github/stars/dreamans/syncd.svg" /></a>
-    <a href="https://github.com/dreamans/syncd/network/members"><img src="https://img.shields.io/github/forks/dreamans/syncd.svg" /></a>
-    <a href='https://gitee.com/dreamans/syncd/stargazers'><img src='https://gitee.com/dreamans/syncd/badge/star.svg?theme=dark' /></a>
-    <a href='https://gitee.com/dreamans/syncd/members'><img src='https://gitee.com/dreamans/syncd/badge/fork.svg?theme=dark' /></a>
-</p>
-<p align="center">Syncd是一款开源的代码部署工具，它具有简单、高效、易用等特点，可以提高团队的工作效率。</p>
-<p align="center"><a href="https://gitee.com/dreamans/syncd"><img width="130px" align="center" src="docs/assets/img/gitee-logo-black.svg" /></a></p>
-<p align="center">码云GVP项目</p>
+<h3 align="center">SyncdX - 自动化部署工具</h3>
+<p align="center">SyncdX是一款基于Syncd开源的代码部署工具，在此基础上做的二次开发，目的是更加满足公司对上线流程的要求。</p>
 
 ## 文档
 
-[查看文档](https://syncd.cc)
+[查看文档（此文件来源于syncd.cc，是做的二次开发）](https://syncd.cc)
 
 ## 特性
 
@@ -31,19 +20,21 @@
 - 完善的上线工作流
 - 邮件通知机制
 
+## 修改的地方
+- 修改项目发布时根据执行的shell命令的结果来判断发布是否成功
+- 修复发布单构建过程中的hook脚本错误问题
+- 将构建过程中hook脚本命令执行结果加入构建的结构中
+
 ## 项目地址
 
-Github: https://github.com/dreamans/syncd
+Github: https://github.com/yangyongli/autodeploy
 
-Gitee: https://gitee.com/dreamans/syncd
 
 ## 获取帮助
 
-Syncd使用交流QQ群①: 725302833
+本项目根据以下源码做二次开发，目的是更加满足公司对上线流程的要求
+Syncd https://github.com/dreamans/syncd
 
-## 捐赠
-
-Syncd的发展离不开您的支持，[前往捐赠](https://syncd.cc/docs/#donate.md)
 
 ## LICENSE
 

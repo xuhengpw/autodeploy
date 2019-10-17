@@ -32,8 +32,8 @@ Github: https://github.com/yangyongli/autodeploy
 
 ## 获取帮助
 
-本项目根据以下源码做二次开发，目的是更加满足公司对上线流程的要求
-Syncd https://github.com/dreamans/syncd
+本项目根据https://github.com/dreamans/syncd做二次开发，
+目的是更加满足公司对上线流程的要求，在此感谢Syncd的作者
 
 
 ## LICENSE

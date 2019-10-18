@@ -302,7 +302,7 @@ func DeployStart(c *gin.Context) {
 		return
 	}
 
-	// cluster servers
+	// cluster servers 一个项目可以关联多个server组（项目集群）
 	serverList, err := server.ServerGetListByGroupIds(proj.OnlineCluster)
 	if err != nil {
 		render.AppError(c, err.Error())
@@ -316,12 +316,20 @@ func DeployStart(c *gin.Context) {
 		render.AppError(c, err.Error())
 		return
 	}
-
+	//构建groupId为key,[]server（每个组的server形成的slice）为value的map
 	groupSrvs := map[int][]server.Server{}
 	for _, srv := range serverList {
 		groupSrvs[srv.GroupId] = append(groupSrvs[srv.GroupId], srv)
 	}
-
+	/*
+		构造[]deploy目的做发布动作，以集群（group）以单位构造deploy，每个deploy包含本集群（group）的所有server信息
+		以每个deploy为单位向db中插入数据（有几个集群（组）就insert几条），其中deploy中的content以serverID，serverResult等数据构
+		构造对像，并形成slice
+		deploy_task表中存 []deploy
+		deploy:{id:serverId,task:serverResult,error:error,status:status},
+		其中serverResult为每个server执行的命令和也会开有slice
+		serverResult:{cmd:cmd,stdout:stdout,stderr:stderr,success:success}
+	*/
 	deploys := []*depTask.Deploy{}
 	for _, gid := range proj.OnlineCluster {
 		gsrv, exists := groupSrvs[gid]
@@ -368,6 +376,7 @@ func DeployStart(c *gin.Context) {
 		}
 		d.UpdateStatus()
 	}
+	//将集群下的server 执行的命令结果以 []map[string]interface{} 方式形成
 	finishDeployFn := func(id, gid, status int, serverResult []*depTask.ServerResult) {
 		taskStatus := deploy.DEPLOY_STATUS_SUCCESS
 		if status == depTask.STATUS_FAILED {
@@ -379,9 +388,11 @@ func DeployStart(c *gin.Context) {
 			if e := r.Error; e != nil {
 				err = e.Error()
 			}
+			/*以server的ID为一个key task为server中执行所有命令返回的结果形成对像，
+			在以对像slice形成组成当前一个group下的结果存入表中*/
 			srvRest = append(srvRest, map[string]interface{}{
 				"id":     r.ID,
-				"task":   r.TaskResult,
+				"task":   r.TaskResult, //一个server执行的所有命令结果slice
 				"status": r.Status,
 				"error":  err,
 			})

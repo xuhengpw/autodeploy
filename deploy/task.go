@@ -40,7 +40,7 @@ func NewTask(id, mode int, deploys []*Deploy, startFn, finishFn CallbackFn, task
 				//并行执行发布任务
 				deploy.Parallel()
 			default:
-				//串行搪行发布任务
+				//串行执行发布任务
 				deploy.Serial()
 			}
 			resultList, status := deploy.Result()

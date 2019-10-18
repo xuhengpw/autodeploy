@@ -205,7 +205,7 @@ func BuildStart(c *gin.Context) {
 		}
 		b.Finish()
 
-		// run hook script 并return 执行结果
+		// run hook script 并return 执行结果 hooks script 失败不影响构建本身
 		hookResult := common.HookBuild(id)
 		syncd.App.Logger.Info(" 执行hookBuild的返回信息%s", string(gostring.JsonEncode(hookResult)))
 
